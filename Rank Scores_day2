@@ -1,0 +1,1 @@
+select  JobTitle,SickLeaveHours, DENSE_Rank() Over(Order by SickLeaveHours desc) RemainingSLH_Rank from [AdventureWorks2019].[HumanResources].[Employee]
