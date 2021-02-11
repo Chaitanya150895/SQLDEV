@@ -1,0 +1,12 @@
+CREATE FUNCTION getNthHighestVacationHours(@N INT) RETURNS INT AS
+BEGIN
+    RETURN (
+        /* Write your T-SQL query statement below. */
+        select distinct VacationHours from [AdventureWorks2019].[HumanResources].[Employee] order by VacationHours desc
+        offset (@N-1) Row
+        Fetch NEXT 1 ROWS ONLY
+    );
+END
+GO
+
+Select [DBO].[getNthHighestVacationHours](10);
