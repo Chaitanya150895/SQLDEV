@@ -1,0 +1,1 @@
+select Score, DENSE_Rank() Over(Order by Score desc) Rank from Scores
