@@ -1,0 +1,9 @@
+SELECT  Distinct E1.OrganizationLevel as ConsecutiveNum FROM 
+ [AdventureWorks2019].[HumanResources].[Employee] E1,
+ [AdventureWorks2019].[HumanResources].[Employee] E2,
+ [AdventureWorks2019].[HumanResources].[Employee] E3
+Where 
+E1.BusinessEntityID = E2.BusinessEntityID - 1
+AND E1.BusinessEntityID = E3.BusinessEntityID - 2
+And E1.OrganizationLevel =  E2.OrganizationLevel
+AND E1.OrganizationLevel =  E3.OrganizationLevel
