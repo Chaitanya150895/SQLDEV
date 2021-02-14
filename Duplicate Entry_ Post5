@@ -1,0 +1,16 @@
+--method --
+SELECT JobTitle, count(JobTitle) FROM [AdventureWorks2019].[HumanResources].[Employee] group by JobTitle having count(JobTitle) > 1
+
+--method USING CTE--
+With CTE (JobTitle, rowno) AS(
+SELECT JobTitle, Row_Number() Over(Partition by JobTitle order by JobTitle) as rowno FROM [AdventureWorks2019].[HumanResources].[Employee]  )
+
+Select JobTitle, rowno from CTE where rowno > 1
+
+--method Derived Table--
+select JobTitle, newCount from
+ (
+ select JobTitle, count(JobTitle) as newCount FROM [AdventureWorks2019].[HumanResources].[Employee]
+ group by JobTitle having count(JobTitle) > 1
+ )
+as JobTitle
