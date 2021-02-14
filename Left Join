@@ -1,0 +1,6 @@
+--Customers Who Never Order
+
+SELECT  C.Name as Customers from Customers C
+LEFT Join Orders O
+ON C.Id = O.CustomerId
+WHERE O.CustomerId IS NULL
