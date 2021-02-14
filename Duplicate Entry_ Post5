@@ -1,0 +1,16 @@
+--method --
+SELECT email from Person group by email having count(email) > 1
+
+--method USING CTE--
+With CTE (email, rowno) AS(
+SELECT email, Row_Number() Over(Partition by email order by email) as rowno from Person  )
+
+Select Email from CTE where rowno = 2
+
+--method Derived Table--
+select Email from
+ (
+ select Email, count(Email) as newCount  from Person
+ group by Email having count(Email) > 1
+ )
+as Email
