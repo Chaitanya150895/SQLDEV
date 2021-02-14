@@ -1,4 +1,4 @@
---method --
+--method 1st --
 SELECT email from Person group by email having count(email) > 1
 
 --method USING CTE--
