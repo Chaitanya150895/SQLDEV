@@ -1,0 +1,5 @@
+SELECT * From 
+(select  LoginID Employee, JobTitle Job, vacationhours, DENSE_Rank() Over(Partition BY JobTitle ORDER BY vacationhours desc)
+DenseRank from [AdventureWorks2019].[HumanResources].[Employee])
+as Derived
+where DenseRank <= 3 order by Job
