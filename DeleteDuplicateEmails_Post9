@@ -1,0 +1,13 @@
+with cameleon (ID, Email, RecCount) as
+(
+Select Id, Email, Row_number() OVER(Partition by Email order by Id) as RecCount
+from 
+Person 
+)
+
+delete
+from Person where ID IN (
+SELECT Min(ID) ID from Cameleon 
+group by Email, RecCount having RecCount = 1 and Email in
+(Select Distinct Email as tobe from cameleon where RecCount > 1)
+)
