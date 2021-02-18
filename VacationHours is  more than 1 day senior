@@ -1,0 +1,4 @@
+SELECT b.LoginID,  a.VacationHours, a.HireDate,   b.VacationHours, b.HireDate
+FROM [AdventureWorks2019].[HumanResources].[Employee] a, [AdventureWorks2019].[HumanResources].[Employee] b
+WHERE a.VacationHours > b.VacationHours
+AND DATEDIFF(day,b.HireDate,a.HireDate) = 1
