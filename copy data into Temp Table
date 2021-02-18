@@ -1,0 +1,11 @@
+IF OBJECT_ID ('dbo.Gloves', 'U') IS NOT NULL  -- 'U' user defined table
+DROP TABLE dbo.Gloves;  
+GO  
+ 
+SELECT ProductModelID, Name  
+INTO #Gloves  
+FROM Production.ProductModel  
+WHERE ProductModelID IN (3, 4);  
+GO
+
+SELECT * FROM #Gloves
