@@ -1,0 +1,9 @@
+;WITH GUIDESPLIT AS(
+SELECT CAST('<x>' + 
+REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Guide,'\','&Quot;'),'<','&lt;'),'>','&tg;'),'\','&Quot;'),'&','&amp;'),',','</x><x>') 
++ '</x>' AS XML) AS SPLITVALUES, Guide FROM Hospital)
+
+SELECT SPLITVALUES, SPLITVALUES.query('distinct-values(/x/text())').value('.','varchar(250)') AS SPLITTED,  
+Guide FROM GUIDESPLIT
+WHERE SPLITVALUES.query('distinct-values(/x/text())').value('.','varchar(250)') IN 
+('Operative','Wound type:Operative','Wound type:Operative Operative','Operative Wound type:Operative','Operative Wound type:Operative Operative')
